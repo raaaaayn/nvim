@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local updated_capabilites = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local default_capabilites = require('cmp_nvim_lsp')
 
 vim.diagnostic.config({
   -- float = { source = "always", border = border },
@@ -93,7 +93,7 @@ local setup_server = function(server, config)
 
 	config = vim.tbl_deep_extend("force", {
 		on_attach = lsp_keymaps,
-		capabilities = updated_capabilites,
+		capabilities = default_capabilites,
 		flags = {
 			debounce_text_changes = nil,
 		},

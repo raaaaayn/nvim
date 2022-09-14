@@ -51,7 +51,6 @@ use({ 'hrsh7th/nvim-cmp',
 			require("pluginssetup.cmp")
 		end
 })
-
 use 'hrsh7th/cmp-nvim-lsp'
 use 'hrsh7th/cmp-buffer'
 use 'hrsh7th/cmp-path'
@@ -83,6 +82,7 @@ use 'tpope/vim-fugitive' --git add remove commit push rebase etc all without eve
 use 'diepm/vim-rest-console' --very much like vscode rest extension, make http requests from vim
 use({'iamcco/markdown-preview.nvim', run='cd app && yarn install'}) -- vim markdown preview
 --use 'Yggdroot/indentLine' --shows line indents
+use({'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}) -- pretty buffer tabs
 end,
 })
 
