@@ -2,9 +2,9 @@ local lspconfig = require("lspconfig")
 local default_capabilites = require('cmp_nvim_lsp')
 
 vim.diagnostic.config({
-  -- float = { source = "always", border = border },
-  virtual_text = false,
-  signs = true,
+	-- float = { source = "always", border = border },
+	virtual_text = false,
+	signs = true,
 })
 
 -- Show line diagnostics automatically in hover window
@@ -33,7 +33,7 @@ local function lsp_keymaps()
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = 0 })
 	vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, { buffer = 0 })
 	vim.keymap.set("n", "n]", vim.diagnostic.goto_next, { buffer = 0 })
-	vim.keymap.set("n", "<leader>f", vim.lsp.buf.formatting, { buffer = 0 })
+	vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { buffer = 0 })
 end
 
 local servers = {
@@ -45,7 +45,7 @@ local servers = {
 	vimls = true,
 	yamlls = true,
 	sumneko_lua = true,
-	jdtls =  true,
+	jdtls = true,
 
 	clangd = {
 		cmd = {
