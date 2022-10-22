@@ -1,5 +1,4 @@
 local lspconfig = require("lspconfig")
-local default_capabilites = require('cmp_nvim_lsp')
 
 vim.diagnostic.config({
 	-- float = { source = "always", border = border },
@@ -11,7 +10,8 @@ vim.diagnostic.config({
 vim.o.updatetime = 250
 vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
 
-local function lsp_keymaps()
+local function lsp_keymaps(client, buffr)
+	local bufopts = { noremap=true, silent=true, buffer=bufnr }
 	-- vim.api.nvim_create_autocmd("CursorHold", {
 	-- 	buffer = bufnr,
 	-- 	callback = function()
@@ -26,14 +26,14 @@ local function lsp_keymaps()
 	-- 		vim.diagnostic.open_float(nil, opts)
 	-- 	end
 	-- })
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = 0 })
-	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = 0 })
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = 0 })
-	vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, { buffer = 0 })
-	vim.keymap.set("n", "n]", vim.diagnostic.goto_next, { buffer = 0 })
-	vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { buffer = 0 })
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, bufopts)
+	vim.keymap.set("n", "n]", vim.diagnostic.goto_next, bufopts)
+	vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
 end
 
 local servers = {
@@ -68,18 +68,7 @@ local servers = {
 	},
 
 	cssls = true,
-	tsserver = {
-		cmd = { "typescript-language-server", "--stdio" },
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-		},
-		on_attach = lsp_keymaps(),
-	},
+	tsserver = true,
 }
 
 local setup_server = function(server, config)
@@ -93,9 +82,8 @@ local setup_server = function(server, config)
 
 	config = vim.tbl_deep_extend("force", {
 		on_attach = lsp_keymaps,
-		capabilities = default_capabilites,
 		flags = {
-			debounce_text_changes = nil,
+			debounce_text_changes = 150,
 		},
 	}, config)
 
@@ -105,3 +93,56 @@ end
 for server, config in pairs(servers) do
 	setup_server(server, config)
 end
+
+require("null-ls").setup({
+  on_attach = function(client, bufnr)
+    if client.server_capabilities.documentFormattingProvider then
+      vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
+
+      -- format on save
+      vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+    end
+
+    if client.server_capabilities.documentRangeFormattingProvider then
+      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
+    end
+  end,
+})
+
+require("prettier").setup({
+  bin = 'prettier', -- or `'prettierd'` (v0.22+)
+    cli_options = {
+    arrow_parens = "always",
+    bracket_spacing = true,
+    bracket_same_line = false,
+    embedded_language_formatting = "auto",
+    end_of_line = "lf",
+    html_whitespace_sensitivity = "css",
+    -- jsx_bracket_same_line = false,
+    jsx_single_quote = false,
+    print_width = 80,
+    prose_wrap = "preserve",
+    quote_props = "as-needed",
+    semi = true,
+    single_attribute_per_line = false,
+    single_quote = false,
+    tab_width = 2,
+    trailing_comma = "es5",
+    use_tabs = false,
+    vue_indent_script_and_style = false,
+  },
+  filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "less",
+    "markdown",
+    "scss",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+  },
+})

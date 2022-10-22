@@ -1,8 +1,8 @@
 require('ryn/plugins') -- plugins download
+require('lsp/ls-setup') -- setting up language servers
 require('pluginssetup/setup') -- plugins config
 require('ryn/settings') -- vim settings
 require('ryn/keymaps') -- keymaps
-require('lsp/ls-setup') -- setting up language servers
 
 -- reload lua files
 local lua_dirs = vim.fn.glob("./lua/*", 0, 1)

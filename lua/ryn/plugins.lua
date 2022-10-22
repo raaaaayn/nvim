@@ -19,12 +19,12 @@ use 'williamboman/mason.nvim'
 use 'williamboman/mason-lspconfig.nvim'
 
 -- Treesitter
- use(
-            {
-                'nvim-treesitter/nvim-treesitter',
-                 run = ':TSUpdate',
-            }
-        )
+use(
+           {
+               'nvim-treesitter/nvim-treesitter',
+                run = ':TSUpdate',
+           }
+       )
 
 -- Telescope
 use 'nvim-lua/popup.nvim'
@@ -42,8 +42,12 @@ use {
 -- Faster telescope search algorithm
 use({'nvim-telescope/telescope-fzf-native.nvim',run= 'make'})
 
--- Lsp config
+-- LSP config
 use 'neovim/nvim-lspconfig'
+
+-- LSP auto format
+use('jose-elias-alvarez/null-ls.nvim')
+use('MunifTanjim/prettier.nvim')
 
 --LSP autocomplete
 use({ 'hrsh7th/nvim-cmp',
@@ -75,7 +79,7 @@ use {
 
 -- Util
 use 'mattn/emmet-vim' --emmet
-use 'jiangmiao/auto-pairs' -- closes brackets
+--use 'jiangmiao/auto-pairs' -- closes brackets
 use 'tpope/vim-commentary' -- makes commenting easy
 use 'airblade/vim-gitgutter' -- shows git changes in files
 use 'tpope/vim-fugitive' --git add remove commit push rebase etc all without ever having to leave vim
