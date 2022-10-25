@@ -46,6 +46,7 @@ local servers = {
 	yamlls = true,
 	sumneko_lua = true,
 	jdtls = true,
+	dartls = true,
 
 	clangd = {
 		cmd = {
