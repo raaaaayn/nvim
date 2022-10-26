@@ -62,6 +62,7 @@ use 'saadparwaiz1/cmp_luasnip'
 
 -- Snippets 
 use 'L3MON4D3/LuaSnip'
+use 'rafamadriz/friendly-snippets' -- Pre defined snippets
 
 -- Themes
 use 'ajmwagar/vim-deus'
