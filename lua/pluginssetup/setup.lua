@@ -6,15 +6,11 @@ require("mason-lspconfig").setup({
 require("telescope")
 
 require("nvim-treesitter.configs").setup {
-  -- A list of parser names, or "all"
   ensure_installed = "all",
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
-
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = false,
+  auto_install = true,
 
   -- List of parsers to ignore installing (for "all")
   ignore_install = { "javascript" },
@@ -47,21 +43,40 @@ require("nvim-treesitter.configs").setup {
     additional_vim_regex_highlighting = false,
   },
 }
+-- local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+-- ft_to_parser.ino = "c" -- using c parser for .ino
 
 require("lualine").setup()
-require("bufferline").setup{
-	options = {
-		separator_style = "padded_slant",
-		mode = "tabs",
-		diagnostics = "nvim_lsp",
-		show_buffer_icons = false, -- disable filetype icons for buffers
-		show_buffer_default_icon = false, -- whether or not an unrecognised filetype should show a default icon
-		show_buffer_close_icons = false,
-		show_close_icon = false,
-	}
-}
+-- require("bufferline").setup{
+-- 	options = {
+-- 		separator_style = "padded_slant",
+-- 		mode = "tabs",
+-- 		diagnostics = "nvim_lsp",
+-- 		show_buffer_icons = false, -- disable filetype icons for buffers
+-- 		show_buffer_default_icon = false, -- whether or not an unrecognised filetype should show a default icon
+-- 		show_buffer_close_icons = false,
+-- 		show_close_icon = false,
+-- 	}
+-- }
 require("lualine").setup({
     -- options = { theme = 'horizon' }
     options = { theme = 'onedark' }
 })
 require("nvim-tree").setup()
+require("flutter-tools").setup{
+  lsp = {
+    on_attach = function (client, buffr)
+    	local bufopts = { noremap = true, silent = true, buffer = buffr }
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+			vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
+			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+			vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, bufopts)
+			vim.keymap.set("n", "n]", vim.diagnostic.goto_next, bufopts)
+			vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+    end,
+	}
+} -- use defaults

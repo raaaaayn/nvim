@@ -11,26 +11,14 @@ vim.o.updatetime = 250
 vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
 
 local function lsp_keymaps(client, buffr)
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	-- vim.api.nvim_create_autocmd("CursorHold", {
-	-- 	buffer = bufnr,
-	-- 	callback = function()
-	-- 		local opts = {
-	-- 			focusable = false,
-	-- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-	-- 			border = 'rounded',
-	-- 			source = 'always',
-	-- 			prefix = ' ',
-	-- 			scope = 'cursor',
-	-- 		}
-	-- 		vim.diagnostic.open_float(nil, opts)
-	-- 	end
-	-- })
+	local bufopts = { noremap = true, silent = true, buffer = buffr }
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	-- vim.keymap.set("n", "tgd", tab split | vim.lsp.buf.definition(), bufopts)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, bufopts)
 	vim.keymap.set("n", "n]", vim.diagnostic.goto_next, bufopts)
 	vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
@@ -47,22 +35,34 @@ local servers = {
 	yamlls = true,
 	sumneko_lua = true,
 	jdtls = true,
-	dartls = true,
-
-	clangd = {
+	-- dartls = true, -- handled by flutter-tools
+	clangd = true,
+	arduino_language_server = {
 		cmd = {
-			"clangd",
-			"--background-index",
-			"--suggest-missing-includes",
-			"--clang-tidy",
-			"--header-insertion=iwyu",
-		},
-		-- Required for lsp-status
-		init_options = {
-			clangdFileStatus = true,
-		},
-		handlers = nvim_status and nvim_status.extensions.clangd.setup() or nil,
+			"arduino-language-server",
+			"-cli-config",
+			"/home/day/.arduino15/arduino-cli.yaml",
+			"-fqbn", "arduino:avr:uno",
+			"-cli", "arduino-cli",
+			"-clangd", "clangd"
+		}
 	},
+	sqlls = true,
+
+	-- clangd = {
+	-- 	cmd = {
+	-- 		"clangd",
+	-- 		"--background-index",
+	-- 		"--suggest-missing-includes",
+	-- 		"--clang-tidy",
+	-- 		"--header-insertion=iwyu",
+	-- 	},
+	-- 	-- Required for lsp-status
+	-- 	init_options = {
+	-- 		clangdFileStatus = true,
+	-- 	},
+	-- 	handlers = nvim_status and nvim_status.extensions.clangd.setup() or nil,
+	-- },
 
 	rust_analyzer = {
 		cmd = { "rustup", "run", "nightly", "rust-analyzer" },
