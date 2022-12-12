@@ -49,7 +49,7 @@ return require('packer').startup({
 		use('jose-elias-alvarez/null-ls.nvim')
 		use('MunifTanjim/prettier.nvim')
 
-		--LSP autocomplete
+		-- LSP autocomplete
 		use({ 'hrsh7th/nvim-cmp',
 			config = function()
 				require("pluginssetup.cmp")
@@ -59,6 +59,9 @@ return require('packer').startup({
 		use 'hrsh7th/cmp-buffer'
 		use 'hrsh7th/cmp-path'
 		use 'saadparwaiz1/cmp_luasnip'
+
+		-- Autocomplete symbols
+		use 'onsails/lspkind.nvim'
 
 		-- Flutter tools
 		use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
