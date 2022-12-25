@@ -1,9 +1,9 @@
 local function map(mode, lhs, rhs, opts)
-    local options = { noremap = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.keymap.set(mode, lhs, rhs, options)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- save, exit, exit without saving file
@@ -22,10 +22,15 @@ map("n", "<leader>lg", ":Telescope live_grep<CR>")
 -- NvimTree
 map("n", "<C-n>", ":NvimTreeToggle<CR>")
 
--- Vim Rest console 
+-- Vim Rest console
 -- let g:vrc_set_default_mapping = 0
-map("n","<leader>mr", ":call VrcQuery()<CR>")
+vim.g.vrc_set_default_mapping = 0
+map("n", "<leader>mr", ":call VrcQuery()<CR>")
 
+vim.g.vrc_curl_opts = {
+	["-s"] = "",
+	["-i"] = ""
+}
 -- let g:vrc_curl_opts = {
 --       \ '-s':'',
 --       \ '-i':'',
