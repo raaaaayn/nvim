@@ -25,7 +25,7 @@ map("n", "<C-n>", ":NvimTreeToggle<CR>")
 -- Vim Rest console
 -- let g:vrc_set_default_mapping = 0
 vim.g.vrc_set_default_mapping = 0
-map("n", "<leader>mr", ":call VrcQuery()<CR>")
+map("n", ";", ":call VrcQuery()<CR>")
 
 vim.g.vrc_curl_opts = {
 	["-s"] = "",
