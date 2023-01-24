@@ -25,6 +25,8 @@ return require('packer').startup({
 				run = ':TSUpdate',
 			}
 		)
+		-- Treesitter playground
+		use 'nvim-treesitter/playground'
 
 		-- Telescope
 		use 'nvim-lua/popup.nvim'
@@ -66,6 +68,9 @@ return require('packer').startup({
 		-- Flutter tools
 		use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
 
+		-- Live server
+		use 'barrett-ruth/live-server.nvim'
+
 		-- Snippets
 		use 'L3MON4D3/LuaSnip'
 		use 'rafamadriz/friendly-snippets' -- Pre defined snippets
@@ -91,7 +96,8 @@ return require('packer').startup({
 		use 'airblade/vim-gitgutter' -- shows git changes in files
 		use 'tpope/vim-fugitive' --git add remove commit push rebase etc all without ever having to leave vim
 		use 'diepm/vim-rest-console' --very much like vscode rest extension, make http requests from vim
-		use({ 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }) -- vim markdown preview
+		use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+			setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) -- vim markdown preview
 		--use 'Yggdroot/indentLine' --shows line indents
 		-- use({ 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }) -- pretty buffer tabs
 	end,

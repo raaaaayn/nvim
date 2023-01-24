@@ -2,6 +2,8 @@
 local cmp = require("cmp")
 local lspkind = require('lspkind')
 
+require("luasnip.loaders.from_vscode").lazy_load()
+
 local source_mapping = {
 	buffer = "[Buffer]",
 	nvim_lsp = "[LSP]",
