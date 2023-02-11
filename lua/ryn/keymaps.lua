@@ -6,6 +6,9 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
+-- map("n", "<F3>", ":set spell!<CR>")
+-- map("n", "<F3><C-O>", ":set spell!<CR>")
+
 -- save, exit, exit without saving file
 map("n", "<C-s>", ":w<cr>")
 map("n", "<C-x>", ":x<cr>")
@@ -28,13 +31,21 @@ vim.g.vrc_set_default_mapping = 0
 map("n", ";", ":call VrcQuery()<CR>")
 
 vim.g.vrc_curl_opts = {
-	["-s"] = "",
-	["-i"] = ""
+		["-s"] = "",
+		["-i"] = ""
 }
 -- let g:vrc_curl_opts = {
 --       \ '-s':'',
 --       \ '-i':'',
 --     \}
+
+-- Git conflict
+map("n", "gco", ":GitConflictChooseOurs<CR>")
+map("n", "gct", ":GitConflictChooseTheirs<CR>")
+map("n", "gn", ":GitConflictNextConflict<CR>")
+map("n", "gp", ":GitConflictPrevConflict<CR>")
+
+map("n", "<C-g>", ":G<CR>")
 
 -- Git fugitive
 map("n", "<C-g>", ":G<CR>")
