@@ -6,13 +6,22 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- map("n", "<F3>", ":set spell!<CR>")
--- map("n", "<F3><C-O>", ":set spell!<CR>")
-
 -- save, exit, exit without saving file
 map("n", "<C-s>", ":w<cr>")
 map("n", "<C-x>", ":x<cr>")
 map("n", "<C-q>", ":q!<cr>")
+
+-- greatest remap ever
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- next greatest remap ever : asbjornHaland
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>p", [["+p]])
+
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/gI<Left><Left><Left>]])
 
 -- source config
 map("n", "<F4>", ":lua package.loaded.main = nil <cr>:source ~/.config/nvim/init.lua <cr>")
@@ -42,6 +51,7 @@ vim.g.vrc_curl_opts = {
 -- Git conflict
 map("n", "gco", ":GitConflictChooseOurs<CR>")
 map("n", "gct", ":GitConflictChooseTheirs<CR>")
+map("n", "gcb", ":GitConflictChooseBoth<CR>")
 map("n", "gn", ":GitConflictNextConflict<CR>")
 map("n", "gp", ":GitConflictPrevConflict<CR>")
 

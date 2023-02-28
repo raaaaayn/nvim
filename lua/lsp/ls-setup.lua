@@ -61,7 +61,9 @@ local servers = {
 		cssls = true,
 		tsserver = true,
 		-- npm install -g @tailwindcss/language-server
-		tailwindcss = true
+		tailwindcss = true,
+		-- npm install -g @astrojs/language-server
+		astro = true
 }
 
 local setup_server = function(server, config)
@@ -91,7 +93,9 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
 		sources = {
-				require("null-ls").builtins.formatting.prettierd, -- markdown formatting
+				require("null-ls").builtins.formatting.prettierd.with({
+						extra_filetypes = { "astro" },
+				})
 		},
 		on_attach = function(client, bufnr)
 			if client.supports_method("textDocument/formatting") then
