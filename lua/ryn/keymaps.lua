@@ -27,13 +27,10 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/gI<Left><Left><
 map("n", "<F4>", ":lua package.loaded.main = nil <cr>:source ~/.config/nvim/init.lua <cr>")
 -- nnoremap <leader>cb <cmd>lua require("main").curr_buf() <cr>
 
--- Telescope bindings
-map("n", "<leader>cd", ":Telescope find_files<CR>")
-map("n", "<leader>lg", ":Telescope live_grep<CR>")
-
 -- NvimTree
-map("n", "<C-n>", ":NvimTreeToggle<CR>")
+-- map("n", "<C-n>", ":NvimTreeToggle<CR>")
 
+map("n", "<C-n>", ":Ex<CR>")
 -- Vim Rest console
 -- let g:vrc_set_default_mapping = 0
 vim.g.vrc_set_default_mapping = 0

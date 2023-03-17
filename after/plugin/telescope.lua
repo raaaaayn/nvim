@@ -16,3 +16,7 @@ mappings.curr_buf = function()
 end
 
 vim.opt.complete.opt = { "menu", "menuone", "noselect" }
+
+-- Telescope bindings
+vim.keymap.set("n", "<leader>cd", ":Telescope find_files<CR>" )
+vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>")
