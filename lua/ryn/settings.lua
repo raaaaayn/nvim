@@ -29,3 +29,5 @@ vim.cmd('colorscheme deus')
 -- vim.cmd('colorscheme catppuccin')
 
 g.mapleader = " "
+
+vim.cmd('autocmd FileType astro setlocal commentstring=<!--\\ %s ')
