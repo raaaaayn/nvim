@@ -62,7 +62,7 @@ return require('packer').startup({
 							}
 					}
 
-					use("github/copilot.vim")
+					-- use("github/copilot.vim")
 
 					-- LSP auto format
 					use('jose-elias-alvarez/null-ls.nvim')
