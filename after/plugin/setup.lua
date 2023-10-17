@@ -12,7 +12,7 @@ require("flutter-tools").setup {
 			vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+			vim.keymap.set({ "v", "n" }, "<leader>qf", vim.lsp.buf.code_action, opts)
 			vim.keymap.set("n", "n[", vim.diagnostic.goto_prev, bufopts)
 			vim.keymap.set("n", "n]", vim.diagnostic.goto_next, bufopts)
 			-- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format({ async = true }), bufopts)
