@@ -97,9 +97,10 @@ return require('packer').startup({
 		use { 'akinsho/git-conflict.nvim', tag = "*", config = function()
 			require('git-conflict').setup()
 		end }                         --  merge conflict resolver
-		use 'tpope/vim-fugitive'      --git add remove commit push rebase etc all without ever having to leave vim
+		use 'tpope/vim-fugitive'      -- git add remove commit push rebase etc all without ever having to leave vim
+		use 'tpope/vim-rhubarb' -- GBrowse for github
 		use 'idanarye/vim-merginal'
-		use 'diepm/vim-rest-console'  --very much like vscode rest extension, make http requests from vim
+		use 'diepm/vim-rest-console'  -- very much like vscode rest extension, make http requests from vim
 		use({
 			"iamcco/markdown-preview.nvim",
 			run = "cd app && npm install",
