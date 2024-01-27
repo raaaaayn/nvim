@@ -27,14 +27,14 @@ return require('packer').startup({
 		use 'nvim-lua/popup.nvim'
 		use 'nvim-lua/plenary.nvim'
 		use 'nvim-telescope/telescope.nvim'
-		use 'kyazdani42/nvim-web-devicons'  --File type icons
+		use 'kyazdani42/nvim-web-devicons' --File type icons
 		use {
 			'kyazdani42/nvim-tree.lua',
 			requires = {
-				'kyazdani42/nvim-web-devicons',  -- optional, for file icons
+				'kyazdani42/nvim-web-devicons', -- optional, for file icons
 			},
-			tag = 'nightly'                    -- optional, updated every week. (see issue #1193)
-		}                                    --NerdTree alternative
+			tag = 'nightly'               -- optional, updated every week. (see issue #1193)
+		}                               --NerdTree alternative
 
 		-- Faster telescope search algorithm
 		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
@@ -79,7 +79,7 @@ return require('packer').startup({
 		-- Themes
 		use 'ajmwagar/vim-deus'
 		use 'fratajczak/one-monokai-vim'
-		use 'joshdick/onedark.vim'
+		use 'navarasu/onedark.nvim'
 		use { "catppuccin/nvim", as = "catppuccin" }
 
 		use {
@@ -90,23 +90,83 @@ return require('packer').startup({
 		use("theprimeagen/harpoon")
 
 		-- Util
-		use 'mattn/emmet-vim'         --emmet
+		use 'mattn/emmet-vim'      --emmet
 		--use 'jiangmiao/auto-pairs' -- closes brackets
-		use 'tpope/vim-commentary'    -- makes commenting easy
-		use 'airblade/vim-gitgutter'  -- shows git changes in files
-		use { 'akinsho/git-conflict.nvim', tag = "*", config = function()
-			require('git-conflict').setup()
-		end }                         --  merge conflict resolver
-		use 'tpope/vim-fugitive'      -- git add remove commit push rebase etc all without ever having to leave vim
-		use 'tpope/vim-rhubarb' -- GBrowse for github
+		use 'airblade/vim-gitgutter' -- shows git changes in files
+
+		use {
+			"NeogitOrg/neogit",
+			dependencies = {
+				"nvim-lua/plenary.nvim", -- required
+				"sindrets/diffview.nvim", -- optional - Diff integration
+
+				-- Only one of these is needed, not both.
+				"nvim-telescope/telescope.nvim", -- optional
+				"ibhagwan/fzf-lua",          -- optional
+			},
+			config = function()
+				require('neogit').setup()
+			end
+		}
+		use {
+			"sindrets/diffview.nvim",
+			config = function()
+				require('diffview').setup(
+					{
+						view = {
+							-- Configure the layout and behavior of different types of views.
+							-- Available layouts:
+							--  'diff1_plain'
+							--    |'diff2_horizontal'
+							--    |'diff2_vertical'
+							--    |'diff3_horizontal'
+							--    |'diff3_vertical'
+							--    |'diff3_mixed'
+							--    |'diff4_mixed'
+							-- For more info, see ':h diffview-config-view.x.layout'.
+							default = {
+								layout = "diff3_mixed",
+							},
+							merge_tool = {
+								-- Config for conflicted files in diff views during a merge or rebase.
+								layout = "diff3_mixed",
+							},
+						},
+					}
+				)
+			end
+		}
+
+		use {
+			'akinsho/git-conflict.nvim',
+			tag = "*",
+			config = function()
+				require('git-conflict').setup()
+			end
+		}                        --  merge conflict resolver
+		use 'tpope/vim-commentary' -- makes commenting easy
+		use 'tpope/vim-abolish'
+		use 'tpope/vim-fugitive' -- git add remove commit push rebase etc all without ever having to leave vim
+		use 'tpope/vim-rhubarb'  -- GBrowse for github
+		use {                    -- Review Pull Requests
+			'pwntester/octo.nvim',
+			requires = {
+				'nvim-lua/plenary.nvim',
+				'nvim-telescope/telescope.nvim',
+				'nvim-tree/nvim-web-devicons',
+			},
+			config = function()
+				require "octo".setup()
+			end
+		}
 		use 'idanarye/vim-merginal'
-		use 'diepm/vim-rest-console'  -- very much like vscode rest extension, make http requests from vim
+		use 'diepm/vim-rest-console' -- very much like vscode rest extension, make http requests from vim
 		use({
 			"iamcco/markdown-preview.nvim",
 			run = "cd app && npm install",
 			setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
 			ft = { "markdown" },
-		})  -- vim markdown preview
+		}) -- vim markdown preview
 		use { 'norcalli/nvim-colorizer.lua', config = function()
 			require 'colorizer'.setup()
 		end }
