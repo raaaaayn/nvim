@@ -65,7 +65,7 @@ return require('packer').startup({
 		-- use("github/copilot.vim")
 
 		-- LSP auto format
-		use('jose-elias-alvarez/null-ls.nvim')
+		-- use('jose-elias-alvarez/null-ls.nvim')
 
 		-- Autocomplete symbols
 		use 'onsails/lspkind.nvim'
@@ -87,7 +87,7 @@ return require('packer').startup({
 			requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 		}
 
-		use("theprimeagen/harpoon")
+		-- use("theprimeagen/harpoon")
 
 		-- Util
 		use 'mattn/emmet-vim'      --emmet
@@ -173,13 +173,20 @@ return require('packer').startup({
 		--use 'Yggdroot/indentLine' --shows line indents
 		-- use({ 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }) -- pretty buffer tabs
 		use {
-			"folke/trouble.nvim",
-			dependencies = { "nvim-tree/nvim-web-devicons" },
+			"folke/zen-mode.nvim",
 			opts = {
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
+				plugins = {
+					tmux = { enabled = false }, -- disables the tmux statusline
+					alacritty = {
+						enabled = true,
+						font = "14", -- font size
 			},
+		}
+			}
+		}
+		use {
+			"folke/trouble.nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons" }
 		}
 	end,
 

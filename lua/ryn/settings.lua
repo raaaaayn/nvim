@@ -30,4 +30,6 @@ vim.cmd('colorscheme deus')
 
 g.mapleader = " "
 
--- vim.cmd('autocmd FileType astro setlocal commentstring=<!--\\ %s ')
+vim.diagnostic.config({
+  virtual_text = false, -- Turn off inline diagnostics
+})

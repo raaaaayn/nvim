@@ -5,7 +5,13 @@ require('telescope').setup {
 		prompt_prefix = "$ ",
 		mappings = {}
 	},
+	-- pickers = {
+	-- 	find_files = {
+	-- 		find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+	-- 	},
+	-- },
 }
+
 local action_state = require('telescope.actions.state') -- runtime Plugin
 
 local mappings = {}
@@ -18,5 +24,5 @@ end
 vim.opt.complete.opt = { "menu", "menuone", "noselect" }
 
 -- Telescope bindings
-vim.keymap.set("n", "<leader>cd", ":Telescope find_files<CR>" )
+vim.keymap.set("n", "<leader>cd", ":Telescope find_files<CR>")
 vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>")
