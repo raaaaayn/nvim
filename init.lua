@@ -60,6 +60,7 @@ require('onedark').setup {
 		-- ["@diff.add"] = colors.Green,
 		-- ["@diff.delete"] = colors.Red,
 		-- ["@error"] = colors.Fg,
+		Normal = { fg = 'my_fg' },
 		Directory = { fg = '$deus_green' },
 		BufferCurrentSign = { fg = '$deus_green' },
 		DiffviewFilePanelTitle = { fg = '$deus_green', fmt = "bold" },
@@ -85,6 +86,8 @@ require('onedark').setup {
 		["@number.float"] = { fg = '$deus_purple' },
 		["@boolean"] = { fg = '$deus_purple' },
 		["@variable"] = { fg = '$my_fg', fmt = cfg.code_style.variables },
+		["@operator"] = { fg = '$my_fg' },
+		["@annotation"] = { fg = '$my_fg' },
 	}
 }
 require('onedark').load()

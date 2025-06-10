@@ -32,7 +32,6 @@ map("n", "<F4>", ":lua package.loaded.main = nil <cr>:source ~/.config/nvim/init
 
 map("n", "<C-n>", ":Ex<CR>")
 -- Vim Rest console
--- let g:vrc_set_default_mapping = 0
 vim.g.vrc_set_default_mapping = 0
 map("n", ";", ":call VrcQuery()<CR>")
 
@@ -40,6 +39,12 @@ vim.g.vrc_curl_opts = {
 	["-s"] = "",
 	["-i"] = ""
 }
+
+vim.g.vrc_auto_format_response_patterns = {
+	['json'] = 'python3 -m json.tool',
+	['xml'] = 'xmllint --format -',
+}
+
 -- let g:vrc_curl_opts = {
 --       \ '-s':'',
 --       \ '-i':'',
@@ -68,7 +73,4 @@ map("n", "<leader>7", "7gt")
 map("n", "<leader>9", "8gt")
 map("n", "<leader>0", ":tablast<cr>")
 map("n", "<leader>tt", ":tabnew<cr>")
-map("n", "<leader>f", vim.lsp.buf.format)
-
--- trouble
 map("n", "<leader>f", vim.lsp.buf.format)

@@ -3,7 +3,10 @@ require('telescope').load_extension('fzf')
 require('telescope').setup {
 	defaults = {
 		prompt_prefix = "$ ",
-		mappings = {}
+		mappings = {},
+		layout_config = {
+			width={padding=0}
+		}
 	},
 	-- pickers = {
 	-- 	find_files = {

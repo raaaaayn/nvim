@@ -13,6 +13,8 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup({
 	function(use)
+		-- Treesitter for blade
+		use 'EmranMR/tree-sitter-blade'
 		-- Treesitter
 		use(
 			{
@@ -124,11 +126,7 @@ return require('packer').startup({
 							--    |'diff3_mixed'
 							--    |'diff4_mixed'
 							-- For more info, see ':h diffview-config-view.x.layout'.
-							default = {
-								layout = "diff3_mixed",
-							},
 							merge_tool = {
-								-- Config for conflicted files in diff views during a merge or rebase.
 								layout = "diff3_mixed",
 							},
 						},
